@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketIQ — AI Market Analysis with Payment After Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #1a202c 0%, #2c5282 100%);
+    }
+    .accent-gradient {
+      background: linear-gradient(135deg, #38b2ac 0%, #319795 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+      border-bottom: 3px solid #38b2ac;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: #38b2ac;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #38b2ac;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <i class="fas fa-brain text-teal-500 text-2xl mr-3"></i>
+          <div>
+            <div class="text-xl font-bold">MarketIQ</div>
+            <div class="text-xs text-teal-500 font-medium">by DigitalEng</div>
+          </div>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#how" class="nav-link text-gray-600 hover:text-gray-900 font-medium">How It Works</a>
+          <a href="#advantages" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Benefits</a>
+          <a href="#examples" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Examples</a>
+          <a href="#pricing" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Pricing</a>
+          <a href="#contact" class="bg-teal-500 text-white px-5 py-2 rounded-lg font-medium hover:bg-teal-600 transition-colors">Get Analysis</a>
+        </nav>
+        
+        <button class="md:hidden text-gray-600">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">AI Market Analysis with Payment After Results</h1>
+        <p class="text-xl md:text-2xl mb-10 opacity-90 animate-fade-in" style="animation-delay: 0.2s">You pay only when you see the completed report and concrete growth opportunities</p>
+        <div class="animate-fade-in" style="animation-delay: 0.4s">
+          <a href="#contact" class="bg-white text-teal-700 font-semibold px-8 py-4 rounded-lg mr-4 inline-block mb-4 hover:bg-gray-100 transition-colors">Get Free Analysis</a>
+          <a href="#how" class="border-2 border-white text-white font-semibold px-8 py-4 rounded-lg inline-block hover:bg-white hover:text-teal-700 transition-colors">How It Works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="advantages" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Risk-Free Proposition for Your Business</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">You risk nothing — we deliver analysis first, payment later</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="card-hover bg-gray-50 p-8 rounded-xl">
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-lock-open text-teal-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Zero Risk</h3>
+          <p class="text-gray-600">You pay only after receiving the complete analysis and visible value</p>
+        </div>
+        
+        <div class="card-hover bg-gray-50 p-8 rounded-xl">
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-bolt text-teal-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Instant Start</h3>
+          <p class="text-gray-600">Initial analysis ready within 48 hours after your request</p>
+        </div>
+        
+        <div class="card-hover bg-gray-50 p-8 rounded-xl">
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-chart-line text-teal-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Actionable Results</h3>
+          <p class="text-gray-600">Not just data, but ready insights and actionable recommendations</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">How Our AI Analysis Works</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Simple process with maximum results</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-start mb-12">
+          <div class="step-number">1</div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">You Submit Request</h3>
+            <p class="text-gray-600">Tell us about your business and goals — takes 2 minutes</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start mb-12">
+          <div class="step-number">2</div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">We Conduct Free Analysis</h3>
+            <p class="text-gray-600">Our AI tools scan the market and identify opportunities</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start mb-12">
+          <div class="step-number">3</div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">You Receive Demo Report</h3>
+            <p class="text-gray-600">See examples of insights and specific recommendations for your niche</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start">
+          <div class="step-number">4</div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">You Make Decision</h3>
+            <p class="text-gray-600">Only after evaluating the report's value do you order full research</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples -->
+  <section id="examples" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">What's Included in Analysis</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Specific data and recommendations for your business</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-search-dollar text-teal-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">Competitor Analysis</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Pricing strategy and positioning</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Strengths and weaknesses</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Unique selling propositions</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-chart-line text-teal-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">Market Trends</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Growing and declining search queries</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Seasonality and cyclical patterns</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>New opportunities and niches</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-users text-teal-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">Customer Profile</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Pain points and needs</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Decision-making criteria</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Communication channels</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-lightbulb text-teal-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">Recommendations</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Specific growth steps</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Content and SEO optimization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-teal-500 mt-1 mr-2"></i>
+              <span>Conversion improvement</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Industries We Serve</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Specialized market analysis for various sectors</p>
+      </div>
+      
+      <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+          <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-utensils text-blue-600 text-xl"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Kitchen Appliances</h3>
+          <p class="text-gray-600 text-sm">Smart kitchen devices, cookware, small appliances</p>
+        </div>
+        
+        <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+          <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-laptop text-green-600 text-xl"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Electronics</h3>
+          <p class="text-gray-600 text-sm">Consumer electronics, gadgets, tech accessories</p>
+        </div>
+        
+        <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-tshirt text-purple-600 text-xl"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Fashion & Apparel</h3>
+          <p class="text-gray-600 text-sm">Clothing, accessories, footwear</p>
+        </div>
+        
+        <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+          <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-home text-orange-600 text-xl"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Home & Garden</h3>
+          <p class="text-gray-600 text-sm">Furniture, decor, garden supplies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="contact" class="py-16 accent-gradient text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6">Get Your Free Market Analysis</h2>
+        <p class="text-xl mb-10 opacity-90">Submit your request and receive initial report within 48 hours</p>
+        
+        <form class="bg-white text-gray-800 p-8 rounded-xl shadow-lg">
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-gray-700 mb-2">Your Name</label>
+              <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500" placeholder="John Smith">
+            </div>
+            <div>
+              <label class="block text-gray-700 mb-2">Email</label>
+              <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500" placeholder="john@company.com">
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <label class="block text-gray-700 mb-2">Your Website or Business</label>
+            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500" placeholder="Company name or website">
+          </div>
+          
+          <div class="mb-6">
+            <label class="block text-gray-700 mb-2">What are you interested in?</label>
+            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500" rows="3" placeholder="Example: competitor analysis, niche research, conversion improvement..."></textarea>
+          </div>
+          
+          <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
+            Get Free Analysis
+          </button>
+          
+          <p class="text-gray-500 text-sm mt-4">By clicking the button, you agree to our Privacy Policy</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-6">
+            <i class="fas fa-brain text-teal-400 text-2xl mr-3"></i>
+            <div>
+              <div class="text-xl font-bold">MarketIQ</div>
+              <div class="text-xs text-teal-300 font-medium">by DigitalEng</div>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-6">AI market analysis with payment after results</p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Competitor Analysis</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Market Research</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Business Audit</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Contact</h4>
+          <div class="space-y-3 text-gray-400">
+            <p>i.m.dig_eng@gmail.com</p>
+            <p>Telegram: @DigitalEng_Support</p>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">DigitalEng</h4>
+          <p class="text-gray-400">Engineering Growth with AI</p>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 MarketIQ by DigitalEng. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
