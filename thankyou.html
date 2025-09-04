@@ -1,49 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You!</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      text-align: center;
-      padding: 60px;
-    }
-    .container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: inline-block;
-      max-width: 500px;
-    }
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #555;
-      font-size: 16px;
-    }
-    a {
-      display: inline-block;
-      margin-top: 30px;
-      text-decoration: none;
-      color: #007BFF;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Digital Solutions for Your Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #212529;
+        }
+        .thank-you-container {
+            text-align: center;
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 90%;
+        }
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #3e92cc, #2a75b3);
+            border-radius: 50%;
+        }
+        .checkmark {
+            color: white;
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+        h1 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0a2463;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #495057;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, #3e92cc, #2a75b3);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(62, 146, 204, 0.4);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Thank You!</h1>
-    <p>Your submission has been received. We’ll be in touch shortly.</p>
-    <a href="index.html">Back to Home</a>
-  </div>
+    <div class="thank-you-container">
+        <div class="checkmark-circle">
+            <div class="checkmark">✓</div>
+        </div>
+        <h1>Thank You for Reaching Out!</h1>
+        <p>Your message has been successfully sent. Our team will contact you shortly to discuss the next steps.</p>
+        <a href="https://ngu2025.github.io/digitaleng-site/" class="btn">Return to Homepage</a>
+    </div>
 </body>
 </html>
