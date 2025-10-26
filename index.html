@@ -12,11 +12,11 @@
         <div class="container">
             <div class="logo">
                 <h1>MATRIX INTELLIGENCE</h1>
-                <span>AI Market Analysis</span>
+                <span>AI-Powered Market Analysis</span>
             </div>
             <nav class="nav">
                 <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#formats" class="nav-link">Services</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="#payment" class="nav-link">Payment</a>
             </nav>
         </div>
@@ -63,63 +63,98 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Request Analysis</h3>
-                    <p>Share your business goals and market focus</p>
+                    <p>Share your business goals and market focus areas</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Get Demo Report</h3>
-                    <p>Receive comprehensive market analysis sample</p>
+                    <h3>Receive Demo Report</h3>
+                    <p>Get comprehensive market analysis sample within 48 hours</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Evaluate Value</h3>
-                    <p>Review insights and recommendations</p>
+                    <p>Review insights and strategic recommendations</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <h3>Pay Only If Satisfied</h3>
-                    <p>USDT payment after confirming value</p>
+                    <p>USDT payment after confirming value and relevance</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="service-formats" id="formats">
+    <!-- Frequency Selector Section -->
+    <section class="frequency-section" id="pricing">
         <div class="container">
-            <h2>Choose Your Analysis Format</h2>
-            <div class="formats-grid">
-                <div class="format-card">
-                    <h3>📄 PDF Report</h3>
-                    <div class="price">From $250</div>
-                    <ul>
-                        <li>Comprehensive market analysis</li>
-                        <li>Competitive intelligence</li>
-                        <li>Strategic recommendations</li>
-                        <li>SWOT analysis</li>
-                    </ul>
-                    <button class="btn-outline" onclick="selectFormat('pdf')">Select PDF Report</button>
+            <h2>Choose Your Monitoring Rhythm</h2>
+            <p class="section-subtitle">Select update frequency that matches your market dynamics</p>
+            
+            <div class="frequency-selector">
+                <div class="frequency-options">
+                    <div class="freq-option" data-freq="daily" data-price="799">
+                        <span class="freq-badge">PRO</span>
+                        <h3>Daily Updates</h3>
+                        <p>For high-volatility markets where every day matters</p>
+                        <ul>
+                            <li>Real-time market alerts</li>
+                            <li>Daily trend analysis</li>
+                            <li>Competitive move tracking</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <div class="price">$799<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option" data-freq="weekly" data-price="499">
+                        <span class="freq-badge">BUSINESS</span>
+                        <h3>Weekly Intelligence</h3>
+                        <p>Optimal balance of depth and agility for growth tracking</p>
+                        <ul>
+                            <li>Weekly comprehensive reports</li>
+                            <li>Market share tracking</li>
+                            <li>Customer insights</li>
+                            <li>Standard support</li>
+                        </ul>
+                        <div class="price">$499<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option active" data-freq="biweekly" data-price="349">
+                        <span class="freq-badge">STANDARD</span>
+                        <h3>Twice a Month</h3>
+                        <p>Comprehensive analysis for stable markets</p>
+                        <ul>
+                            <li>Bi-weekly deep analysis</li>
+                            <li>Competitive landscape</li>
+                            <li>Strategic recommendations</li>
+                            <li>Email support</li>
+                        </ul>
+                        <div class="price">$349<span>/month</span></div>
+                        <button class="btn-primary freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option" data-freq="monthly" data-price="299">
+                        <span class="freq-badge">ESSENTIAL</span>
+                        <h3>Monthly Strategic</h3>
+                        <p>Deep market overview for strategic planning</p>
+                        <ul>
+                            <li>Monthly comprehensive report</li>
+                            <li>Market trend analysis</li>
+                            <li>Basic competitive intelligence</li>
+                            <li>Self-service dashboard</li>
+                        </ul>
+                        <div class="price">$299<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
                 </div>
-                <div class="format-card highlighted">
-                    <h3>🌐 PDF + Live Monitoring</h3>
-                    <div class="price">From $299/month</div>
-                    <ul>
-                        <li>Everything in PDF +</li>
-                        <li>Real-time dashboard</li>
-                        <li>Monthly updates</li>
-                        <li>Change requests</li>
-                    </ul>
-                    <button class="btn-primary" onclick="selectFormat('premium')">Select Premium</button>
-                </div>
-                <div class="format-card">
-                    <h3>🔄 Subscription</h3>
-                    <div class="price">Custom</div>
-                    <ul>
-                        <li>Quarterly deep analysis</li>
-                        <li>Priority support</li>
-                        <li>Custom metrics</li>
-                        <li>API access</li>
-                    </ul>
-                    <button class="btn-outline" onclick="selectFormat('subscription')">Discuss Options</button>
+            </div>
+
+            <div class="frequency-summary">
+                <div class="selected-plan">
+                    <h4>Selected: <span id="selected-frequency">Twice a Month</span></h4>
+                    <div class="final-price">$<span id="selected-price">349</span>/month</div>
+                    <button class="btn-primary large" onclick="proceedToPayment()">Proceed to Payment</button>
                 </div>
             </div>
         </div>
@@ -131,7 +166,7 @@
             <div class="payment-content">
                 <div class="payment-info">
                     <h3>USDT (TRC20) Only</h3>
-                    <p>No registration, no verification, no bureaucracy</p>
+                    <p>No registration, no verification, no bureaucracy. Global payments accepted.</p>
                     
                     <div class="usdt-address">
                         <label>Send USDT to:</label>
@@ -142,7 +177,6 @@
                     </div>
 
                     <div class="qr-code">
-                        <!-- QR code will be added later -->
                         <div class="qr-placeholder">
                             <div class="qr-text">QR Code</div>
                             <div class="qr-note">(Will be added before client communications)</div>

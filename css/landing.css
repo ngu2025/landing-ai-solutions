@@ -1,106 +1,139 @@
-/* Landing-specific styles */
+/* Frequency Section Styles */
+.frequency-section {
+    padding: 80px 0;
+    background: rgba(15, 23, 42, 0.5);
+}
 
-/* Enhanced hero section */
-.hero {
+.section-subtitle {
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+    font-size: 1.1rem;
+}
+
+.frequency-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.freq-option {
+    background: rgba(30, 41, 59, 0.8);
+    border: 2px solid var(--matrix-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    cursor: pointer;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 220, 130, 0.1) 0%, transparent 50%);
-    animation: pulseGlow 4s ease-in-out infinite;
+.freq-option:hover {
+    transform: translateY(-5px);
+    border-color: var(--matrix-accent);
+    box-shadow: 0 10px 25px rgba(0, 220, 130, 0.1);
 }
 
-@keyframes pulseGlow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.8; }
+.freq-option.active {
+    border-color: var(--matrix-accent);
+    background: rgba(0, 220, 130, 0.05);
+    transform: scale(1.02);
 }
 
-/* Enhanced cards */
-.format-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.format-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 220, 130, 0.1), transparent);
-    transition: left 0.6s ease;
-}
-
-.format-card:hover::before {
-    left: 100%;
-}
-
-.format-card.highlighted {
-    position: relative;
-    border: 2px solid var(--matrix-accent);
-}
-
-.format-card.highlighted::after {
-    content: 'POPULAR';
+.freq-badge {
     position: absolute;
     top: -10px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--matrix-accent);
     color: var(--matrix-bg);
-    padding: 0.3rem 1rem;
+    padding: 0.3rem 1.5rem;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Enhanced buttons */
-.btn-primary, .btn-secondary {
-    position: relative;
-    overflow: hidden;
+.freq-option h3 {
+    color: var(--matrix-accent);
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1.3rem;
 }
 
-.btn-primary::before, .btn-secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
+.freq-option p {
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.freq-option ul {
+    list-style: none;
+    text-align: left;
+    margin: 1.5rem 0;
+}
+
+.freq-option li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--matrix-border);
+    font-size: 0.9rem;
+}
+
+.freq-option li:last-child {
+    border-bottom: none;
+}
+
+.freq-option li:before {
+    content: '✓';
+    color: var(--matrix-accent);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.freq-option .price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    color: var(--matrix-accent);
+}
+
+.freq-option .price span {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.freq-select-btn {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s ease;
+    margin-top: 1rem;
 }
 
-.btn-primary:hover::before, .btn-secondary:hover::before {
-    left: 100%;
+/* Frequency Summary */
+.frequency-summary {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 12px;
+    border: 2px solid var(--matrix-accent);
 }
 
-/* Trust badges enhancement */
-.badge {
-    position: relative;
-    transition: transform 0.3s ease;
+.selected-plan h4 {
+    color: var(--matrix-text);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
-.badge:hover {
-    transform: translateY(-5px);
+#selected-frequency {
+    color: var(--matrix-accent);
 }
 
-.badge .icon {
-    transition: transform 0.3s ease;
+.final-price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--matrix-accent);
+    margin: 1rem 0 2rem 0;
 }
 
-.badge:hover .icon {
-    transform: scale(1.2);
-}
-
-/* Payment section enhancements */
+/* Enhanced Payment Section */
 .payment-section {
     position: relative;
 }
@@ -115,14 +148,17 @@
     background: linear-gradient(90deg, transparent, var(--matrix-accent), transparent);
 }
 
-/* Responsive enhancements */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .format-card.highlighted::after {
-        right: 50%;
-        transform: translateX(50%);
+    .frequency-options {
+        grid-template-columns: 1fr;
     }
     
-    .hero::before {
-        animation: none;
+    .freq-option.active {
+        transform: none;
+    }
+    
+    .freq-option {
+        padding: 1.5rem;
     }
 }

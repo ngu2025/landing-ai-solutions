@@ -1,25 +1,19 @@
-// Landing AI Solutions - Main Controller
+// Enhanced Landing AI Solutions - Main Controller
 class LandingAISolutions {
     constructor() {
         this.selectedFormat = null;
+        this.selectedFrequency = 'biweekly';
+        this.selectedPrice = 349;
         this.init();
     }
 
     init() {
         this.bindEvents();
         this.setupSmoothScroll();
+        this.setupFrequencySelector();
     }
 
     bindEvents() {
-        // Format selection
-        document.querySelectorAll('.format-card button').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const card = e.target.closest('.format-card');
-                const format = card.querySelector('h3').textContent;
-                this.selectFormat(format);
-            });
-        });
-
         // Payment confirmation
         const confirmBtn = document.querySelector('.btn-confirm');
         if (confirmBtn) {
@@ -35,6 +29,69 @@ class LandingAISolutions {
                 this.copyAddress();
             });
         }
+    }
+
+    setupFrequencySelector() {
+        // Frequency selection
+        document.querySelectorAll('.freq-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                this.selectFrequency(e.currentTarget);
+            });
+        });
+
+        // Frequency select buttons
+        document.querySelectorAll('.freq-select-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const option = e.target.closest('.freq-option');
+                this.selectFrequency(option);
+            });
+        });
+    }
+
+    selectFrequency(optionElement) {
+        // Remove active class from all options
+        document.querySelectorAll('.freq-option').forEach(opt => {
+            opt.classList.remove('active');
+            opt.querySelector('.freq-select-btn').classList.remove('btn-primary');
+            opt.querySelector('.freq-select-btn').classList.add('btn-outline');
+        });
+
+        // Add active class to selected option
+        optionElement.classList.add('active');
+        optionElement.querySelector('.freq-select-btn').classList.remove('btn-outline');
+        optionElement.querySelector('.freq-select-btn').classList.add('btn-primary');
+
+        // Update selected values
+        this.selectedFrequency = optionElement.dataset.freq;
+        this.selectedPrice = optionElement.dataset.price;
+
+        // Update summary
+        this.updateFrequencySummary();
+        
+        // Scroll to payment section
+        this.scrollToSection('payment');
+    }
+
+    updateFrequencySummary() {
+        const frequencyElement = document.getElementById('selected-frequency');
+        const priceElement = document.getElementById('selected-price');
+        
+        if (frequencyElement && priceElement) {
+            const frequencyText = this.getFrequencyText(this.selectedFrequency);
+            frequencyElement.textContent = frequencyText;
+            priceElement.textContent = this.selectedPrice;
+        }
+    }
+
+    getFrequencyText(frequency) {
+        const frequencyMap = {
+            'daily': 'Daily Updates',
+            'weekly': 'Weekly Intelligence',
+            'biweekly': 'Twice a Month',
+            'monthly': 'Monthly Strategic'
+        };
+        return frequencyMap[frequency] || 'Twice a Month';
     }
 
     setupSmoothScroll() {
@@ -66,6 +123,7 @@ class LandingAISolutions {
         const requestData = {
             company: company,
             email: email,
+            frequency: this.selectedFrequency,
             timestamp: new Date().toISOString(),
             source: 'landing_ai_solutions'
         };
@@ -90,6 +148,7 @@ class LandingAISolutions {
     generateDemoContent(company) {
         return {
             company: company,
+            frequency: this.selectedFrequency,
             sections: [
                 "Market Overview Analysis",
                 "Competitive Landscape", 
@@ -101,10 +160,14 @@ class LandingAISolutions {
         };
     }
 
-    selectFormat(format) {
-        this.selectedFormat = format;
+    proceedToPayment() {
+        if (!this.selectedFrequency) {
+            this.showNotification('Please select a monitoring frequency first');
+            return;
+        }
+        
         this.scrollToSection('payment');
-        this.showNotification(`Selected: ${format}. Proceed to payment when ready.`);
+        this.showNotification(`Proceeding with ${this.getFrequencyText(this.selectedFrequency)} plan`);
     }
 
     copyAddress() {
@@ -134,7 +197,8 @@ class LandingAISolutions {
 
     confirmPayment(txHash, email) {
         const paymentData = {
-            format: this.selectedFormat,
+            frequency: this.selectedFrequency,
+            price: this.selectedPrice,
             txHash: txHash,
             email: email,
             timestamp: new Date().toISOString()
@@ -201,9 +265,9 @@ function scrollToSection(sectionId) {
     }
 }
 
-function selectFormat(format) {
+function proceedToPayment() {
     if (window.landingAI) {
-        window.landingAI.selectFormat(format);
+        window.landingAI.proceedToPayment();
     }
 }
 
