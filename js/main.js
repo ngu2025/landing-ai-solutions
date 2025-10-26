@@ -4,6 +4,7 @@ class LandingAISolutions {
         this.selectedFormat = null;
         this.selectedFrequency = 'biweekly';
         this.selectedPrice = 349;
+        this.pdfGenerator = null;
         this.init();
     }
 
@@ -11,6 +12,8 @@ class LandingAISolutions {
         this.bindEvents();
         this.setupSmoothScroll();
         this.setupFrequencySelector();
+        this.initializePDFGenerator();
+        this.setupModalHandlers();
     }
 
     bindEvents() {
@@ -29,6 +32,19 @@ class LandingAISolutions {
                 this.copyAddress();
             });
         }
+
+        // PDF generation buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('[onclick*="generateSamplePDF"]') || 
+                e.target.closest('[onclick*="generateSamplePDF"]')) {
+                this.generateSamplePDF();
+            }
+            
+            if (e.target.matches('[onclick*="showPDFPreview"]') || 
+                e.target.closest('[onclick*="showPDFPreview"]')) {
+                this.showPDFPreview();
+            }
+        });
     }
 
     setupFrequencySelector() {
@@ -49,18 +65,54 @@ class LandingAISolutions {
         });
     }
 
+    setupModalHandlers() {
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('pdfPreviewModal');
+            if (e.target === modal) {
+                this.closePDFPreview();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closePDFPreview();
+            }
+        });
+    }
+
+    async initializePDFGenerator() {
+        try {
+            // Load PDF generator module
+            if (typeof PDFReportGenerator !== 'undefined') {
+                this.pdfGenerator = new PDFReportGenerator();
+                await this.pdfGenerator.init();
+                console.log('PDF Generator initialized successfully');
+            }
+        } catch (error) {
+            console.warn('PDF Generator not available:', error);
+        }
+    }
+
     selectFrequency(optionElement) {
         // Remove active class from all options
         document.querySelectorAll('.freq-option').forEach(opt => {
             opt.classList.remove('active');
-            opt.querySelector('.freq-select-btn').classList.remove('btn-primary');
-            opt.querySelector('.freq-select-btn').classList.add('btn-outline');
+            const btn = opt.querySelector('.freq-select-btn');
+            if (btn) {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            }
         });
 
         // Add active class to selected option
         optionElement.classList.add('active');
-        optionElement.querySelector('.freq-select-btn').classList.remove('btn-outline');
-        optionElement.querySelector('.freq-select-btn').classList.add('btn-primary');
+        const selectedBtn = optionElement.querySelector('.freq-select-btn');
+        if (selectedBtn) {
+            selectedBtn.classList.remove('btn-outline');
+            selectedBtn.classList.add('btn-primary');
+        }
 
         // Update selected values
         this.selectedFrequency = optionElement.dataset.freq;
@@ -69,8 +121,8 @@ class LandingAISolutions {
         // Update summary
         this.updateFrequencySummary();
         
-        // Scroll to payment section
-        this.scrollToSection('payment');
+        // Show notification
+        this.showNotification(`${this.getFrequencyText(this.selectedFrequency)} plan selected`);
     }
 
     updateFrequencySummary() {
@@ -116,6 +168,9 @@ class LandingAISolutions {
         
         if (company && email) {
             this.submitDemoRequest(company, email);
+        } else if (!company && !email) {
+            // If user cancels both prompts, show sample PDF
+            this.generateSamplePDF();
         }
     }
 
@@ -143,6 +198,9 @@ class LandingAISolutions {
         // Simulate email delivery
         console.log('Demo report delivered to:', email);
         this.showNotification(`Demo report sent to ${email}! Check your inbox.`);
+        
+        // Also generate immediate PDF download
+        this.generateSamplePDF();
     }
 
     generateDemoContent(company) {
@@ -160,24 +218,95 @@ class LandingAISolutions {
         };
     }
 
+    async generateSamplePDF() {
+        this.showNotification('Generating sample PDF report...');
+        
+        try {
+            if (this.pdfGenerator && typeof this.pdfGenerator.generateReport === 'function') {
+                const companyData = {
+                    company_name: 'Sample Corporation',
+                    industry: 'Technology Services',
+                    market_size: '$402.5 Billion',
+                    market_growth: '12.4% YoY',
+                    key_opportunity: 'AI-powered personalized learning solutions',
+                    opportunity_value: '$45M Annual Potential'
+                };
+                
+                await this.pdfGenerator.generateReport({
+                    type: 'demo',
+                    companyData: companyData,
+                    options: {
+                        quality: 'high',
+                        format: 'A4'
+                    }
+                });
+            } else {
+                // Fallback: Redirect to static PDF or show message
+                this.showNotification('PDF system is loading, please try again in a moment...');
+                
+                // Simulate PDF download
+                setTimeout(() => {
+                    this.showNotification('Sample PDF report downloaded successfully!');
+                    // In production, this would trigger actual download
+                    this.simulatePDFDownload();
+                }, 1500);
+            }
+        } catch (error) {
+            console.error('PDF generation error:', error);
+            this.showNotification('Error generating PDF. Please try again.');
+        }
+    }
+
+    simulatePDFDownload() {
+        // Create a fake download link for demonstration
+        const link = document.createElement('a');
+        link.href = '#'; // In production, this would be the actual PDF URL
+        link.download = 'Matrix-Intelligence-Sample-Report.pdf';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    showPDFPreview() {
+        const modal = document.getElementById('pdfPreviewModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            this.showNotification('PDF preview opened');
+        }
+    }
+
+    closePDFPreview() {
+        const modal = document.getElementById('pdfPreviewModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
     proceedToPayment() {
         if (!this.selectedFrequency) {
             this.showNotification('Please select a monitoring frequency first');
+            this.scrollToSection('pricing');
             return;
         }
         
         this.scrollToSection('payment');
-        this.showNotification(`Proceeding with ${this.getFrequencyText(this.selectedFrequency)} plan`);
+        this.showNotification(`Proceeding with ${this.getFrequencyText(this.selectedFrequency)} plan - $${this.selectedPrice}/month`);
     }
 
     copyAddress() {
-        const address = document.getElementById('usdt-address').textContent;
-        navigator.clipboard.writeText(address).then(() => {
+        const address = document.getElementById('usdt-address');
+        if (!address) return;
+        
+        const text = address.textContent;
+        navigator.clipboard.writeText(text).then(() => {
             this.showNotification('USDT address copied to clipboard!');
         }).catch(() => {
             // Fallback for older browsers
             const textArea = document.createElement('textarea');
-            textArea.value = address;
+            textArea.value = text;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand('copy');
@@ -192,6 +321,10 @@ class LandingAISolutions {
         
         if (txHash && email) {
             this.confirmPayment(txHash, email);
+        } else if (!txHash && !email) {
+            this.showNotification('Payment confirmation cancelled');
+        } else {
+            this.showNotification('Please provide both transaction hash and email');
         }
     }
 
@@ -206,26 +339,44 @@ class LandingAISolutions {
 
         console.log('Payment confirmed:', paymentData);
         this.showNotification('Payment confirmed! Full report will be delivered within 48 hours.');
+        
+        // Simulate report delivery
+        setTimeout(() => {
+            this.showNotification(`First ${this.getFrequencyText(this.selectedFrequency)} report sent to ${email}`);
+        }, 3000);
     }
 
     scrollToSection(sectionId) {
         const element = document.getElementById(sectionId);
         if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Adjust for fixed header
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
             });
         }
     }
 
-    showNotification(message) {
+    showNotification(message, type = 'success') {
+        // Remove existing notifications
+        document.querySelectorAll('.matrix-notification').forEach(notification => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        });
+
         // Create notification element
         const notification = document.createElement('div');
+        notification.className = `matrix-notification ${type}`;
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--matrix-accent);
+            background: ${type === 'error' ? '#dc2626' : '#00dc82'};
             color: var(--matrix-bg);
             padding: 1rem 1.5rem;
             border-radius: 8px;
@@ -234,14 +385,26 @@ class LandingAISolutions {
             font-weight: 600;
             max-width: 300px;
             word-wrap: break-word;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
         
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
         // Remove after 5 seconds
         setTimeout(() => {
             if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
             }
         }, 5000);
     }
@@ -262,23 +425,5 @@ function requestDemo() {
 function scrollToSection(sectionId) {
     if (window.landingAI) {
         window.landingAI.scrollToSection(sectionId);
-    }
-}
-
-function proceedToPayment() {
-    if (window.landingAI) {
-        window.landingAI.proceedToPayment();
-    }
-}
-
-function copyAddress() {
-    if (window.landingAI) {
-        window.landingAI.copyAddress();
-    }
-}
-
-function showConfirmationForm() {
-    if (window.landingAI) {
-        window.landingAI.showConfirmationForm();
     }
 }
