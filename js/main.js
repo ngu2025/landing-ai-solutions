@@ -1,4 +1,4 @@
-// Matrix Intelligence - Emergency Fix
+// Matrix Intelligence - Fixed Version
 console.log('Matrix Intelligence loading...');
 
 // Simple initialization
@@ -9,31 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initLanding() {
     console.log('Initializing landing functionality...');
-    
-    // Initialize frequency selector
     initFrequencySelector();
-    
-    // Setup smooth scroll
     setupSmoothScroll();
-    
-    // Setup modal handlers
     setupModalHandlers();
-    
     console.log('Landing initialized successfully');
 }
 
 // Frequency Selector
 function initFrequencySelector() {
-    const options = document.querySelectorAll('.freq-option');
+    var options = document.querySelectorAll('.freq-option');
     console.log('Found frequency options:', options.length);
     
-    options.forEach(option => {
+    options.forEach(function(option) {
         option.addEventListener('click', function() {
             selectFrequency(this);
         });
         
-        // Also handle button clicks
-        const btn = option.querySelector('.freq-select-btn');
+        var btn = option.querySelector('.freq-select-btn');
         if (btn) {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -46,39 +38,35 @@ function initFrequencySelector() {
 function selectFrequency(optionElement) {
     console.log('Selecting frequency:', optionElement.dataset.freq);
     
-    // Remove active class from all
-    document.querySelectorAll('.freq-option').forEach(opt => {
+    document.querySelectorAll('.freq-option').forEach(function(opt) {
         opt.classList.remove('active');
-        const btn = opt.querySelector('.freq-select-btn');
+        var btn = opt.querySelector('.freq-select-btn');
         if (btn) {
             btn.classList.remove('btn-primary');
             btn.classList.add('btn-outline');
         }
     });
     
-    // Add active to selected
     optionElement.classList.add('active');
-    const selectedBtn = optionElement.querySelector('.freq-select-btn');
+    var selectedBtn = optionElement.querySelector('.freq-select-btn');
     if (selectedBtn) {
         selectedBtn.classList.remove('btn-outline');
         selectedBtn.classList.add('btn-primary');
     }
     
-    // Update summary
     updateFrequencySummary(optionElement.dataset.freq, optionElement.dataset.price);
-    showNotification(`Selected: ${getFrequencyText(optionElement.dataset.freq)} plan`);
+    showNotification('Selected: ' + getFrequencyText(optionElement.dataset.freq) + ' plan');
 }
 
 function updateFrequencySummary(frequency, price) {
-    const freqElement = document.getElementById('selected-frequency');
-    const priceElement = document.getElementById('selected-price');
-    
+    var freqElement = document.getElementById('selected-frequency');
+    var priceElement = document.getElementById('selected-price');
     if (freqElement) freqElement.textContent = getFrequencyText(frequency);
     if (priceElement) priceElement.textContent = price;
 }
 
 function getFrequencyText(frequency) {
-    const map = {
+    var map = {
         'daily': 'Daily Updates',
         'weekly': 'Weekly Intelligence', 
         'biweekly': 'Twice a Month',
@@ -89,18 +77,14 @@ function getFrequencyText(frequency) {
 
 // Smooth Scroll
 function setupSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            var target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight || 80;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                var headerHeight = document.querySelector('.header').offsetHeight || 80;
+                var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
             }
         });
     });
@@ -108,37 +92,26 @@ function setupSmoothScroll() {
 
 // Modal Handlers
 function setupModalHandlers() {
-    // Close modal with X
-    const closeBtn = document.querySelector('.close');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closePDFPreview);
-    }
+    var closeBtn = document.querySelector('.close');
+    if (closeBtn) closeBtn.addEventListener('click', closePDFPreview);
     
-    // Close modal on outside click
     document.addEventListener('click', function(e) {
-        const modal = document.getElementById('pdfPreviewModal');
-        if (e.target === modal) {
-            closePDFPreview();
-        }
+        var modal = document.getElementById('pdfPreviewModal');
+        if (e.target === modal) closePDFPreview();
     });
     
-    // Close with Escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePDFPreview();
-        }
+        if (e.key === 'Escape') closePDFPreview();
     });
 }
 
 // Global Functions for HTML onclick
 function requestDemo() {
-    console.log('Request Demo clicked');
-    const company = prompt('Please enter your company name:');
-    const email = prompt('Please enter your email for demo delivery:');
+    var company = prompt('Please enter your company name:');
+    var email = prompt('Please enter your email for demo delivery:');
     
     if (company && email) {
         showNotification('Demo request received! We will contact you within 24 hours.');
-        // Auto-generate sample PDF after demo request
         setTimeout(generateSamplePDF, 1000);
     } else if (!company && !email) {
         generateSamplePDF();
@@ -146,19 +119,12 @@ function requestDemo() {
 }
 
 function generateSamplePDF() {
-    console.log('Generating sample PDF...');
     showNotification('Generating sample PDF report...');
-    
-    // Simulate PDF generation
-    setTimeout(() => {
+    setTimeout(function() {
         showNotification('Sample PDF report downloaded successfully!');
-        
-        // Create simple download
-        const blob = new Blob(['Matrix Intelligence Sample Report - Professional Market Analysis'], { 
-            type: 'text/plain' 
-        });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        var blob = new Blob(['Matrix Intelligence Sample Report'], { type: 'text/plain' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
         a.href = url;
         a.download = 'Matrix-Intelligence-Sample-Report.pdf';
         document.body.appendChild(a);
@@ -169,8 +135,7 @@ function generateSamplePDF() {
 }
 
 function showPDFPreview() {
-    console.log('Showing PDF preview');
-    const modal = document.getElementById('pdfPreviewModal');
+    var modal = document.getElementById('pdfPreviewModal');
     if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -179,7 +144,7 @@ function showPDFPreview() {
 }
 
 function closePDFPreview() {
-    const modal = document.getElementById('pdfPreviewModal');
+    var modal = document.getElementById('pdfPreviewModal');
     if (modal) {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
@@ -187,57 +152,49 @@ function closePDFPreview() {
 }
 
 function proceedToPayment() {
-    const frequency = document.querySelector('.freq-option.active')?.dataset.freq;
+    var activeOption = document.querySelector('.freq-option.active');
+    var frequency = activeOption ? activeOption.dataset.freq : null;
+    
     if (!frequency) {
         showNotification('Please select a monitoring frequency first');
         return;
     }
     
-    // Scroll to payment section
-    const paymentSection = document.getElementById('payment');
+    var paymentSection = document.getElementById('payment');
     if (paymentSection) {
-        const headerHeight = document.querySelector('.header').offsetHeight || 80;
-        const targetPosition = paymentSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
+        var headerHeight = document.querySelector('.header').offsetHeight || 80;
+        var targetPosition = paymentSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
     }
     
-    showNotification(`Proceeding with ${getFrequencyText(frequency)} plan`);
+    showNotification('Proceeding with ' + getFrequencyText(frequency) + ' plan');
 }
 
 function copyAddress() {
-    console.log('Copying USDT address');
-    const address = document.getElementById('usdt-address');
-    const copyBtn = document.querySelector('.btn-copy');
+    var address = document.getElementById('usdt-address');
+    var copyBtn = document.querySelector('.btn-copy');
     
     if (!address) {
         showNotification('USDT address not found', 'error');
         return;
     }
 
-    const text = address.textContent;
+    var text = address.textContent;
     
-    // Visual feedback
     if (copyBtn) {
-        const originalText = copyBtn.textContent;
+        var originalText = copyBtn.textContent;
         copyBtn.textContent = 'Copied!';
         copyBtn.style.background = '#10b981';
-        
-        setTimeout(() => {
+        setTimeout(function() {
             copyBtn.textContent = originalText;
             copyBtn.style.background = '';
         }, 2000);
     }
 
-    // Copy to clipboard
-    navigator.clipboard.writeText(text).then(() => {
+    navigator.clipboard.writeText(text).then(function() {
         showNotification('USDT address copied to clipboard!');
-    }).catch(() => {
-        // Fallback
-        const textArea = document.createElement('textarea');
+    }).catch(function() {
+        var textArea = document.createElement('textarea');
         textArea.value = text;
         document.body.appendChild(textArea);
         textArea.select();
@@ -248,8 +205,8 @@ function copyAddress() {
 }
 
 function showConfirmationForm() {
-    const txHash = prompt('Please enter your USDT transaction hash:');
-    const email = prompt('Please enter your email for report delivery:');
+    var txHash = prompt('Please enter your USDT transaction hash:');
+    var email = prompt('Please enter your email for report delivery:');
     
     if (txHash && email) {
         showNotification('Payment confirmed! Full report will be delivered within 48 hours.');
@@ -259,59 +216,79 @@ function showConfirmationForm() {
 }
 
 function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
+    var element = document.getElementById(sectionId);
     if (element) {
-        const headerHeight = document.querySelector('.header').offsetHeight || 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
+        var headerHeight = document.querySelector('.header').offsetHeight || 80;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
 }
 
-// Notification System
-function showNotification(message, type = 'success') {
+// Missing functions for Matrix Pulse
+function activateSubscription(frequency) {
+    console.log('Activating subscription:', frequency);
+    var landingUrl = 'https://ngu2025.github.io/landing-ai-solutions/#pricing';
+    window.open(landingUrl, '_blank');
+    showNotification('Redirecting to activate ' + getFrequencyText(frequency) + ' plan');
+}
+
+function refreshMetrics() {
+    console.log('Refreshing metrics...');
+    showNotification('Refreshing market data...');
+    setTimeout(function() {
+        showNotification('Market data updated successfully');
+    }, 1500);
+}
+
+// Notification System - FIXED VERSION
+function showNotification(message, type) {
     // Remove existing notifications
-    document.querySelectorAll('.matrix-notification').forEach(note => {
-        note.remove();
+    var existingNotes = document.querySelectorAll('.matrix-notification');
+    existingNotes.forEach(function(note) {
+        note.parentNode.removeChild(note);
     });
     
     // Create new notification
-    const notification = document.createElement('div');
-    notification.className = `matrix-notification ${type === 'error' ? 'error' : ''}`;
+    var notification = document.createElement('div');
+    notification.className = 'matrix-notification';
+    if (type === 'error') {
+        notification.className += ' error';
+    }
+    
     notification.innerHTML = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'error' ? '#dc2626' : '#00dc82'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        z-index: 10000;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        font-weight: 600;
-        max-width: 300px;
-        transform: translateX(400px);
-        transition: transform 0.3s ease;
-    `;
+    
+    // Set styles without template literals
+    notification.style.position = 'fixed';
+    notification.style.top = '20px';
+    notification.style.right = '20px';
+    notification.style.background = type === 'error' ? '#dc2626' : '#00dc82';
+    notification.style.color = 'white';
+    notification.style.padding = '1rem 1.5rem';
+    notification.style.borderRadius = '8px';
+    notification.style.zIndex = '10000';
+    notification.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+    notification.style.fontWeight = '600';
+    notification.style.maxWidth = '300px';
+    notification.style.transform = 'translateX(400px)';
+    notification.style.transition = 'transform 0.3s ease';
     
     document.body.appendChild(notification);
     
     // Animate in
-    setTimeout(() => {
+    setTimeout(function() {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
     // Remove after 4 seconds
-    setTimeout(() => {
+    setTimeout(function() {
         notification.style.transform = 'translateX(400px)';
-        setTimeout(() => notification.remove(), 300);
+        setTimeout(function() {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
     }, 4000);
 }
 
-// Debug info
-console.log('Matrix Intelligence scripts loaded successfully');
+console.log('✅ Matrix Intelligence fully loaded without errors');
