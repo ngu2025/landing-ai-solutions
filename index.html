@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Analysis - Payment After Results | Matrix Intelligence</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>MATRIX INTELLIGENCE</h1>
+                <span>AI Market Analysis</span>
+            </div>
+            <nav class="nav">
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#formats" class="nav-link">Services</a>
+                <a href="#payment" class="nav-link">Payment</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>AI Market Analysis with <span class="accent">Payment After Results</span></h1>
+            <p class="subtitle">Get a demo report first — then decide to pay. Zero risk, exceptional value.</p>
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="requestDemo()">Request Free Demo Report</button>
+                <button class="btn-secondary" onclick="scrollToSection('how-it-works')">How It Works</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-badges">
+        <div class="container">
+            <div class="badges-grid">
+                <div class="badge">
+                    <span class="icon">🎯</span>
+                    <span class="text">Zero Risk</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">⚡</span>
+                    <span class="text">Pay After Results</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">🔒</span>
+                    <span class="text">No Registration</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">💎</span>
+                    <span class="text">USDT Only</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How Our Risk-Free Model Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Request Analysis</h3>
+                    <p>Share your business goals and market focus</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Demo Report</h3>
+                    <p>Receive comprehensive market analysis sample</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Evaluate Value</h3>
+                    <p>Review insights and recommendations</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Pay Only If Satisfied</h3>
+                    <p>USDT payment after confirming value</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-formats" id="formats">
+        <div class="container">
+            <h2>Choose Your Analysis Format</h2>
+            <div class="formats-grid">
+                <div class="format-card">
+                    <h3>📄 PDF Report</h3>
+                    <div class="price">From $250</div>
+                    <ul>
+                        <li>Comprehensive market analysis</li>
+                        <li>Competitive intelligence</li>
+                        <li>Strategic recommendations</li>
+                        <li>SWOT analysis</li>
+                    </ul>
+                    <button class="btn-outline" onclick="selectFormat('pdf')">Select PDF Report</button>
+                </div>
+                <div class="format-card highlighted">
+                    <h3>🌐 PDF + Live Monitoring</h3>
+                    <div class="price">From $299/month</div>
+                    <ul>
+                        <li>Everything in PDF +</li>
+                        <li>Real-time dashboard</li>
+                        <li>Monthly updates</li>
+                        <li>Change requests</li>
+                    </ul>
+                    <button class="btn-primary" onclick="selectFormat('premium')">Select Premium</button>
+                </div>
+                <div class="format-card">
+                    <h3>🔄 Subscription</h3>
+                    <div class="price">Custom</div>
+                    <ul>
+                        <li>Quarterly deep analysis</li>
+                        <li>Priority support</li>
+                        <li>Custom metrics</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="btn-outline" onclick="selectFormat('subscription')">Discuss Options</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payment-section" id="payment">
+        <div class="container">
+            <h2>Simple & Secure Payment</h2>
+            <div class="payment-content">
+                <div class="payment-info">
+                    <h3>USDT (TRC20) Only</h3>
+                    <p>No registration, no verification, no bureaucracy</p>
+                    
+                    <div class="usdt-address">
+                        <label>Send USDT to:</label>
+                        <div class="address-box">
+                            <code id="usdt-address">TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</code>
+                            <button class="btn-copy" onclick="copyAddress()">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="qr-code">
+                        <!-- QR code will be added later -->
+                        <div class="qr-placeholder">
+                            <div class="qr-text">QR Code</div>
+                            <div class="qr-note">(Will be added before client communications)</div>
+                        </div>
+                        <p>Scan to pay with USDT (TRC20)</p>
+                    </div>
+
+                    <div class="payment-confirmation">
+                        <button class="btn-confirm" onclick="showConfirmationForm()">
+                            ✅ I've Paid - Send Full Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready for Risk-Free Market Intelligence?</h2>
+            <p>Get your demo report today and experience the Matrix Intelligence difference</p>
+            <div class="cta-buttons">
+                <button class="btn-primary large" onclick="requestDemo()">
+                    🚀 Request Free Demo Report
+                </button>
+                <button class="btn-secondary" onclick="window.open('https://ngu2025.github.io/matrix-pulse/', '_blank')">
+                    🌐 See Live Monitoring Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>
