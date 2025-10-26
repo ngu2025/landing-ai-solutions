@@ -625,11 +625,21 @@ body {
     font-size: 0.8rem;
     margin-left: 1rem;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-copy:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 220, 130, 0.3);
+}
+
+.btn-copy.copied {
+    background: #10b981;
+}
+
+.btn-copy.copied::after {
+    content: '✓ Copied!';
 }
 
 .qr-code {
@@ -692,7 +702,7 @@ body {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
     left: 0;
     top: 0;
     width: 100%;
@@ -711,6 +721,18 @@ body {
     max-height: 90vh;
     overflow-y: auto;
     border: 2px solid var(--matrix-accent);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modal-header {
@@ -734,6 +756,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s ease;
+    line-height: 1;
 }
 
 .close:hover {
@@ -792,6 +815,32 @@ body {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Notification Styles */
+.matrix-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--matrix-accent);
+    color: var(--matrix-bg);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    z-index: 10000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    max-width: 300px;
+    word-wrap: break-word;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+}
+
+.matrix-notification.error {
+    background: #dc2626;
+}
+
+.matrix-notification.show {
+    transform: translateX(0);
 }
 
 /* Responsive Design */
@@ -889,5 +938,13 @@ body {
     
     .pdf-stats {
         grid-template-columns: 1fr;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
     }
 }

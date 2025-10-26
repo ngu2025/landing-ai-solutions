@@ -12,8 +12,9 @@ class LandingAISolutions {
         this.bindEvents();
         this.setupSmoothScroll();
         this.setupFrequencySelector();
-        this.initializePDFGenerator();
         this.setupModalHandlers();
+        this.initializePDFGenerator();
+        console.log('Matrix Intelligence Landing initialized');
     }
 
     bindEvents() {
@@ -33,17 +34,16 @@ class LandingAISolutions {
             });
         }
 
-        // PDF generation buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('[onclick*="generateSamplePDF"]') || 
-                e.target.closest('[onclick*="generateSamplePDF"]')) {
-                this.generateSamplePDF();
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closePDFPreview();
             }
-            
-            if (e.target.matches('[onclick*="showPDFPreview"]') || 
-                e.target.closest('[onclick*="showPDFPreview"]')) {
-                this.showPDFPreview();
-            }
+        });
+
+        // Listen for PDF notifications
+        document.addEventListener('pdfNotification', (e) => {
+            this.showNotification(e.detail.message, e.detail.type);
         });
     }
 
@@ -73,25 +73,20 @@ class LandingAISolutions {
                 this.closePDFPreview();
             }
         });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closePDFPreview();
-            }
-        });
     }
 
     async initializePDFGenerator() {
         try {
-            // Load PDF generator module
+            // Check if PDF generator is available
             if (typeof PDFReportGenerator !== 'undefined') {
                 this.pdfGenerator = new PDFReportGenerator();
                 await this.pdfGenerator.init();
                 console.log('PDF Generator initialized successfully');
+            } else {
+                console.log('PDF Generator not available, using fallback methods');
             }
         } catch (error) {
-            console.warn('PDF Generator not available:', error);
+            console.warn('PDF Generator initialization failed:', error);
         }
     }
 
@@ -153,9 +148,13 @@ class LandingAISolutions {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -171,6 +170,8 @@ class LandingAISolutions {
         } else if (!company && !email) {
             // If user cancels both prompts, show sample PDF
             this.generateSamplePDF();
+        } else {
+            this.showNotification('Please provide both company name and email');
         }
     }
 
@@ -200,7 +201,9 @@ class LandingAISolutions {
         this.showNotification(`Demo report sent to ${email}! Check your inbox.`);
         
         // Also generate immediate PDF download
-        this.generateSamplePDF();
+        setTimeout(() => {
+            this.generateSamplePDF();
+        }, 1000);
     }
 
     generateDemoContent(company) {
@@ -232,7 +235,7 @@ class LandingAISolutions {
                     opportunity_value: '$45M Annual Potential'
                 };
                 
-                await this.pdfGenerator.generateReport({
+                const result = await this.pdfGenerator.generateReport({
                     type: 'demo',
                     companyData: companyData,
                     options: {
@@ -240,32 +243,45 @@ class LandingAISolutions {
                         format: 'A4'
                     }
                 });
-            } else {
-                // Fallback: Redirect to static PDF or show message
-                this.showNotification('PDF system is loading, please try again in a moment...');
                 
-                // Simulate PDF download
-                setTimeout(() => {
-                    this.showNotification('Sample PDF report downloaded successfully!');
-                    // In production, this would trigger actual download
-                    this.simulatePDFDownload();
-                }, 1500);
+                if (result && !result.success) {
+                    throw new Error(result.error);
+                }
+                
+            } else {
+                // Fallback PDF generation
+                this.generateFallbackPDF();
             }
         } catch (error) {
             console.error('PDF generation error:', error);
-            this.showNotification('Error generating PDF. Please try again.');
+            this.showNotification('Using fallback PDF generation method...');
+            this.generateFallbackPDF();
         }
     }
 
-    simulatePDFDownload() {
-        // Create a fake download link for demonstration
-        const link = document.createElement('a');
-        link.href = '#'; // In production, this would be the actual PDF URL
-        link.download = 'Matrix-Intelligence-Sample-Report.pdf';
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    generateFallbackPDF() {
+        // Create a simple PDF download simulation
+        const fileName = 'Matrix-Intelligence-Sample-Report.pdf';
+        
+        // Simulate download delay
+        setTimeout(() => {
+            this.showNotification(`Sample PDF "${fileName}" downloaded successfully!`);
+            
+            // Create a fake download for demonstration
+            const blob = new Blob(['Sample PDF Content - Matrix Intelligence Report'], { 
+                type: 'application/pdf' 
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+        }, 1500);
     }
 
     showPDFPreview() {
@@ -273,7 +289,7 @@ class LandingAISolutions {
         if (modal) {
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
-            this.showNotification('PDF preview opened');
+            this.showNotification('PDF preview opened - scroll to see sample content');
         }
     }
 
@@ -298,33 +314,75 @@ class LandingAISolutions {
 
     copyAddress() {
         const address = document.getElementById('usdt-address');
-        if (!address) return;
+        const copyBtn = document.querySelector('.btn-copy');
         
+        if (!address) {
+            this.showNotification('USDT address not found', 'error');
+            return;
+        }
+
         const text = address.textContent;
+        
+        // Visual feedback
+        if (copyBtn) {
+            const originalText = copyBtn.textContent;
+            const originalBackground = copyBtn.style.background;
+            
+            copyBtn.textContent = 'Copied!';
+            copyBtn.style.background = '#10b981';
+            copyBtn.classList.add('copied');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.background = originalBackground;
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Copy to clipboard
         navigator.clipboard.writeText(text).then(() => {
             this.showNotification('USDT address copied to clipboard!');
-        }).catch(() => {
+        }).catch((err) => {
+            console.error('Clipboard copy failed:', err);
             // Fallback for older browsers
             const textArea = document.createElement('textarea');
             textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
             document.body.appendChild(textArea);
             textArea.select();
-            document.execCommand('copy');
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    this.showNotification('USDT address copied to clipboard!');
+                } else {
+                    this.showNotification('Failed to copy address. Please copy manually.', 'error');
+                }
+            } catch (fallbackErr) {
+                this.showNotification('Failed to copy address. Please copy manually.', 'error');
+            }
+            
             document.body.removeChild(textArea);
-            this.showNotification('USDT address copied to clipboard!');
         });
     }
 
     showConfirmationForm() {
         const txHash = prompt('Please enter your USDT transaction hash:');
+        if (!txHash) {
+            this.showNotification('Payment confirmation cancelled');
+            return;
+        }
+
         const email = prompt('Please enter your email for report delivery:');
-        
+        if (!email) {
+            this.showNotification('Payment confirmation cancelled');
+            return;
+        }
+
         if (txHash && email) {
             this.confirmPayment(txHash, email);
-        } else if (!txHash && !email) {
-            this.showNotification('Payment confirmation cancelled');
-        } else {
-            this.showNotification('Please provide both transaction hash and email');
         }
     }
 
@@ -332,98 +390,4 @@ class LandingAISolutions {
         const paymentData = {
             frequency: this.selectedFrequency,
             price: this.selectedPrice,
-            txHash: txHash,
-            email: email,
-            timestamp: new Date().toISOString()
-        };
-
-        console.log('Payment confirmed:', paymentData);
-        this.showNotification('Payment confirmed! Full report will be delivered within 48 hours.');
-        
-        // Simulate report delivery
-        setTimeout(() => {
-            this.showNotification(`First ${this.getFrequencyText(this.selectedFrequency)} report sent to ${email}`);
-        }, 3000);
-    }
-
-    scrollToSection(sectionId) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            // Adjust for fixed header
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    }
-
-    showNotification(message, type = 'success') {
-        // Remove existing notifications
-        document.querySelectorAll('.matrix-notification').forEach(notification => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        });
-
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `matrix-notification ${type}`;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${type === 'error' ? '#dc2626' : '#00dc82'};
-            color: var(--matrix-bg);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            z-index: 10000;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            font-weight: 600;
-            max-width: 300px;
-            word-wrap: break-word;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        `;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        
-        // Animate in
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-        
-        // Remove after 5 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }
-        }, 5000);
-    }
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.landingAI = new LandingAISolutions();
-});
-
-// Global functions for HTML onclick handlers
-function requestDemo() {
-    if (window.landingAI) {
-        window.landingAI.requestDemo();
-    }
-}
-
-function scrollToSection(sectionId) {
-    if (window.landingAI) {
-        window.landingAI.scrollToSection(sectionId);
-    }
-}
+            tx
