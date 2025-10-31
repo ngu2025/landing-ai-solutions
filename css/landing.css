@@ -948,3 +948,22 @@ body {
         padding: 1rem;
     }
 }
+/* Fix footer text visibility for AI-Solutions */
+.matrix-footer .link-group a {
+    color: #e0e0e0 !important;
+    opacity: 0.9;
+}
+
+.matrix-footer .link-group a:hover {
+    color: var(--matrix-accent) !important;
+    opacity: 1;
+}
+
+.matrix-footer .link-group h4 {
+    color: var(--matrix-accent) !important;
+    margin-bottom: 1rem;
+}
+
+.matrix-footer .footer-bottom {
+    color: #b0b0b0 !important;
+}
