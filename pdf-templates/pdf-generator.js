@@ -1,14 +1,502 @@
-// SUPER SIMPLE TEST VERSION
-window.generateSamplePDF = function() {
-    console.log('🚀 TEST: Downloading PDF...');
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Analysis - Payment After Results | Matrix Intelligence</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>MATRIX INTELLIGENCE</h1>
+                <span>AI-Powered Market Analysis</span>
+            </div>
+            <nav class="nav">
+                <a href="https://ngu2025.github.io/matrix-intelligence-constructor/" class="nav-link">🧩 Create Report</a>
+                <a href="#analysis" class="nav-link active">📊 AI Analysis</a>
+                <a href="https://ngu2025.github.io/matrix-pulse/" class="nav-link">📈 Live Monitoring</a>
+                <div class="nav-divider"></div>
+                <a href="#ecosystem-pricing" class="nav-link">💎 Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>AI Market Analysis with <span class="accent">Payment After Results</span></h1>
+            <p class="subtitle">Get a demo report first — then decide to pay. Zero risk, exceptional value.</p>
+            
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="requestDemo()">Request Free Demo Report</button>
+                <button class="btn-secondary" onclick="generateSamplePDF()">📄 Download Sample PDF</button>
+                <button class="btn-outline" onclick="scrollToSection('how-it-works')">How It Works</button>
+            </div>
+
+            <div class="trust-indicators">
+                <div class="indicator">
+                    <span class="number">48h</span>
+                    <span class="label">Demo Delivery</span>
+                </div>
+                <div class="indicator">
+                    <span class="number">200+</span>
+                    <span class="label">Data Sources</span>
+                </div>
+                <div class="indicator">
+                    <span class="number">0%</span>
+                    <span class="label">Risk</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-badges">
+        <div class="container">
+            <div class="badges-grid">
+                <div class="badge">
+                    <span class="icon">🎯</span>
+                    <span class="text">Zero Risk</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">⚡</span>
+                    <span class="text">Pay After Results</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">🔒</span>
+                    <span class="text">No Registration</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">💎</span>
+                    <span class="text">USDT Only</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">📊</span>
+                    <span class="text">PDF Reports</span>
+                </div>
+                <div class="badge">
+                    <span class="icon">🌍</span>
+                    <span class="text">Global Coverage</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Demo Section -->
+    <section class="pdf-demo-section" id="pdf-demo">
+        <div class="container">
+            <h2>See Our Report Quality First</h2>
+            <p class="section-subtitle">Download a sample PDF report to evaluate our analysis depth and insights quality</p>
+            
+            <div class="pdf-preview-grid">
+                <div class="pdf-feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>Market Intelligence</h3>
+                    <p>Comprehensive market size, growth trends, and opportunity analysis</p>
+                </div>
+                
+                <div class="pdf-feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Competitive Landscape</h3>
+                    <p>Detailed competitor analysis with market share and strategy insights</p>
+                </div>
+                
+                <div class="pdf-feature">
+                    <div class="feature-icon">💡</div>
+                    <h3>Strategic Recommendations</h3>
+                    <p>Actionable insights prioritized by impact and implementation time</p>
+                </div>
+                
+                <div class="pdf-feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Data Visualization</h3>
+                    <p>Clear charts and metrics for easy decision-making</p>
+                </div>
+            </div>
+
+            <div class="pdf-demo-actions">
+                <button class="btn-primary large" onclick="generateSamplePDF()">
+                    📄 Download Sample PDF Report
+                </button>
+                <button class="btn-outline" onclick="showPDFPreview()">
+                    👁️ Quick Preview
+                </button>
+            </div>
+
+            <div class="pdf-stats">
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Pages of Analysis</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Market Segments</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Competitors Analyzed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Strategic Recommendations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How Our Risk-Free Model Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Request Analysis</h3>
+                    <p>Share your business goals and market focus areas</p>
+                    <div class="step-feature">
+                        <span class="feature-icon">📄</span>
+                        <span>Get sample PDF report</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Receive Demo Report</h3>
+                    <p>Get comprehensive market analysis sample within 48 hours</p>
+                    <div class="step-feature">
+                        <span class="feature-icon">🔍</span>
+                        <span>Evaluate insights quality</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Evaluate Value</h3>
+                    <p>Review insights and strategic recommendations in detailed PDF</p>
+                    <div class="step-feature">
+                        <span class="feature-icon">✅</span>
+                        <span>Verify relevance</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Pay Only If Satisfied</h3>
+                    <p>USDT payment after confirming value and relevance</p>
+                    <div class="step-feature">
+                        <span class="feature-icon">📧</span>
+                        <span>Get full PDF reports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unified Ecosystem Pricing -->
+    <section class="unified-pricing" id="ecosystem-pricing">
+        <div class="container">
+            <h2>Matrix Intelligence Ecosystem</h2>
+            <p class="section-subtitle">Three tiers for complete market intelligence</p>
+            
+            <div class="pricing-matrix">
+                <!-- STRATEGIC -->
+                <div class="plan-card strategic">
+                    <div class="plan-header">
+                        <h3>STRATEGIC</h3>
+                        <div class="price">$199<span>/month</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>✅ 1 report in Constructor</li>
+                        <li>✅ Basic AI Analysis</li>
+                        <li>✅ 14-day Pulse trial</li>
+                        <li>✅ Email support</li>
+                    </ul>
+                    <button class="btn-outline" onclick="selectPlan('strategic')">Choose Strategic</button>
+                </div>
+
+                <!-- DEEP -->
+                <div class="plan-card deep featured">
+                    <div class="plan-header">
+                        <h3>DEEP</h3>
+                        <div class="price">$499<span>/month</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>✅ 3 reports in Constructor</li>
+                        <li>✅ Advanced AI Analysis</li>
+                        <li>✅ Basic Pulse monitoring</li>
+                        <li>✅ Priority support</li>
+                    </ul>
+                    <button class="btn-primary" onclick="selectPlan('deep')">Choose Deep</button>
+                </div>
+
+                <!-- QUANTUM -->
+                <div class="plan-card quantum">
+                    <div class="plan-header">
+                        <h3>QUANTUM</h3>
+                        <div class="price">$999<span>/month</span></div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>✅ Unlimited reports</li>
+                        <li>✅ Full AI Analysis suite</li>
+                        <li>✅ Advanced Pulse + customization</li>
+                        <li>✅ Personal manager</li>
+                    </ul>
+                    <button class="btn-outline" onclick="selectPlan('quantum')">Choose Quantum</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legacy Frequency Selector (Keep as alternative) -->
+    <section class="frequency-section" id="legacy-pricing">
+        <div class="container">
+            <h2>Choose Your Monitoring Rhythm</h2>
+            <p class="section-subtitle">Select update frequency that matches your market dynamics</p>
+            
+            <div class="frequency-selector">
+                <div class="frequency-options">
+                    <div class="freq-option" data-freq="daily" data-price="799">
+                        <span class="freq-badge">PRO</span>
+                        <h3>Daily Updates</h3>
+                        <p>For high-volatility markets where every day matters</p>
+                        <ul>
+                            <li>Real-time market alerts</li>
+                            <li>Daily PDF reports</li>
+                            <li>Competitive move tracking</li>
+                            <li>Priority support</li>
+                            <li>API access</li>
+                        </ul>
+                        <div class="price">$799<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option" data-freq="weekly" data-price="499">
+                        <span class="freq-badge">BUSINESS</span>
+                        <h3>Weekly Intelligence</h3>
+                        <p>Optimal balance of depth and agility for growth tracking</p>
+                        <ul>
+                            <li>Weekly comprehensive PDF reports</li>
+                            <li>Market share tracking</li>
+                            <li>Customer insights</li>
+                            <li>Standard support</li>
+                            <li>Data export</li>
+                        </ul>
+                        <div class="price">$499<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option active" data-freq="biweekly" data-price="349">
+                        <span class="freq-badge">STANDARD</span>
+                        <h3>Twice a Month</h3>
+                        <p>Comprehensive analysis for stable markets</p>
+                        <ul>
+                            <li>Bi-weekly deep analysis PDFs</li>
+                            <li>Competitive landscape</li>
+                            <li>Strategic recommendations</li>
+                            <li>Email support</li>
+                            <li>PDF reports only</li>
+                        </ul>
+                        <div class="price">$349<span>/month</span></div>
+                        <button class="btn-primary freq-select-btn">Select Plan</button>
+                    </div>
+
+                    <div class="freq-option" data-freq="monthly" data-price="299">
+                        <span class="freq-badge">ESSENTIAL</span>
+                        <h3>Monthly Strategic</h3>
+                        <p>Deep market overview for strategic planning</p>
+                        <ul>
+                            <li>Monthly comprehensive PDF report</li>
+                            <li>Market trend analysis</li>
+                            <li>Basic competitive intelligence</li>
+                            <li>Self-service dashboard</li>
+                            <li>Standard PDF format</li>
+                        </ul>
+                        <div class="price">$299<span>/month</span></div>
+                        <button class="btn-outline freq-select-btn">Select Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frequency-summary">
+                <div class="selected-plan">
+                    <h4>Selected: <span id="selected-frequency">Twice a Month</span></h4>
+                    <div class="final-price">$<span id="selected-price">349</span>/month</div>
+                    <div class="plan-features-summary">
+                        <span class="feature-tag">📊 Bi-weekly PDF Reports</span>
+                        <span class="feature-tag">🎯 Competitive Analysis</span>
+                        <span class="feature-tag">💡 Strategic Recommendations</span>
+                    </div>
+                    <button class="btn-primary large" onclick="proceedToPayment()">Proceed to Payment</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payment-section" id="payment">
+        <div class="container">
+            <h2>Simple & Secure Payment</h2>
+            <div class="payment-content">
+                <div class="payment-info">
+                    <h3>USDT (TRC20) Only</h3>
+                    <p>No registration, no verification, no bureaucracy. Global payments accepted.</p>
+                    
+                    <div class="payment-steps">
+                        <div class="payment-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <strong>Request Demo Report</strong>
+                                <p>Get sample PDF to evaluate quality</p>
+                            </div>
+                        </div>
+                        <div class="payment-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <strong>Review Insights</strong>
+                                <p>Verify relevance for your business</p>
+                            </div>
+                        </div>
+                        <div class="payment-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <strong>Pay with USDT</strong>
+                                <p>Only if satisfied with demo quality</p>
+                            </div>
+                        </div>
+                        <div class="payment-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <strong>Receive Full PDF Reports</strong>
+                                <p>Based on your chosen frequency</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="usdt-address">
+                        <label>Send USDT to:</label>
+                        <div class="address-box">
+                            <code id="usdt-address">TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</code>
+                            <button class="btn-copy" onclick="copyAddress()">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="qr-code">
+                        <div class="qr-placeholder">
+                            <div class="qr-text">QR Code</div>
+                            <div class="qr-note">(Will be added before client communications)</div>
+                        </div>
+                        <p>Scan to pay with USDT (TRC20)</p>
+                    </div>
+
+                    <div class="payment-confirmation">
+                        <button class="btn-confirm" onclick="showConfirmationForm()">
+                            ✅ I've Paid - Send Full Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready for Risk-Free Market Intelligence?</h2>
+            <p>Get your demo report today and experience the Matrix Intelligence difference</p>
+            <div class="cta-buttons">
+                <button class="btn-primary large" onclick="requestDemo()">
+                    🚀 Request Free Demo Report
+                </button>
+                <button class="btn-secondary" onclick="generateSamplePDF()">
+                    📄 Download Sample PDF
+                </button>
+                <button class="btn-outline" onclick="window.open('https://ngu2025.github.io/matrix-pulse/', '_blank')">
+                    🌐 See Live Monitoring Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Preview Modal -->
+    <div id="pdfPreviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sample PDF Report Preview</h3>
+                <span class="close" onclick="closePDFPreview()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="pdf-preview-content">
+                    <div class="preview-page">
+                        <div class="preview-header">
+                            <div class="preview-logo">MATRIX INTELLIGENCE</div>
+                            <div class="preview-title">Market Intelligence Demo Report</div>
+                        </div>
+                        <div class="preview-section">
+                            <h4>Executive Summary</h4>
+                            <p>Comprehensive analysis of market trends, competitive landscape, and growth opportunities...</p>
+                        </div>
+                        <div class="preview-section">
+                            <h4>Key Findings</h4>
+                            <ul>
+                                <li>Market growth: +12.4% YoY</li>
+                                <li>Competitive intensity: High</li>
+                                <li>Emerging opportunities: AI integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn-primary" onclick="generateSamplePDF()">Download Full PDF</button>
+                    <button class="btn-outline" onclick="closePDFPreview()">Close Preview</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Footer -->
+    <footer class="matrix-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>MATRIX INTELLIGENCE</h3>
+                    <p>Unified Market Intelligence Ecosystem</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Services</h4>
+                        <a href="https://ngu2025.github.io/matrix-intelligence-constructor/">Report Constructor</a>
+                        <a href="https://ngu2025.github.io/landing-ai-solutions/">AI Analysis</a>
+                        <a href="https://ngu2025.github.io/matrix-pulse/">Live Monitoring</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Plans</h4>
+                        <a href="#ecosystem-pricing">Strategic ($199)</a>
+                        <a href="#ecosystem-pricing">Deep ($499)</a>
+                        <a href="#ecosystem-pricing">Quantum ($999)</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Matrix Intelligence. All services in one ecosystem.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/pdf-generator.js"></script>
     
-    // Самый простой и надежный способ
-    const link = document.createElement('a');
-    link.href = '/downloads/market_research_sample.pdf';
-    link.download = 'Matrix_Report.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    console.log('✅ TEST: Download initiated');
-};
+    <script>
+        // Unified pricing selection
+        function selectPlan(plan) {
+            const plans = {
+                strategic: { price: 199, name: 'STRATEGIC' },
+                deep: { price: 499, name: 'DEEP' }, 
+                quantum: { price: 999, name: 'QUANTUM' }
+            };
+            
+            const selected = plans[plan];
+            alert(`Selected ${selected.name} plan for $${selected.price}/month. Redirecting to payment...`);
+            // Here would be integration with payment system
+        }
+    </script>
+</body>
