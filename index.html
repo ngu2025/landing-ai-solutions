@@ -55,7 +55,7 @@
         </div>
     </section>
 
-    <!-- ВОССТАНОВЛЕН ПЛАТЕЖНЫЙ РАЗДЕЛ -->
+    <!-- ОБНОВЛЕННЫЙ ПЛАТЕЖНЫЙ РАЗДЕЛ С QR-КОДОМ -->
     <section class="payment-section" id="payment">
         <div class="container">
             <h2>Simple & Secure Payment in USDT</h2>
@@ -95,37 +95,37 @@
                         </div>
                     </div>
 
-                    <!-- ВОССТАНОВЛЕН USDT АДРЕС -->
-                    <div class="usdt-address">
-                        <label>Send USDT (TRC20) to:</label>
-                        <div class="address-box">
-                            <code id="usdt-address">TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</code>
-                            <button class="btn-copy" onclick="copyAddress()">Copy</button>
+                    <!-- USDT АДРЕС И QR-КОД -->
+                    <div class="usdt-payment-container">
+                        <div class="usdt-address">
+                            <label>Send USDT (TRC20) to:</label>
+                            <div class="address-box">
+                                <code id="usdt-address">TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</code>
+                                <button class="btn-copy" onclick="copyAddress()">Copy</button>
+                            </div>
+                            <small>Network: TRC20 (Tron) | Minimum: $199</small>
                         </div>
-                        <small>Network: TRC20 (Tron) | Minimum: $199</small>
+
+                        <div class="qr-code">
+                            <img src="images/USDT_QR_Code.png" alt="USDT QR Code" class="qr-image">
+                            <p>Scan to pay with USDT (TRC20)</p>
+                            <small>Address: TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</small>
+                        </div>
                     </div>
 
-                    <div class="qr-code">
-                        <div class="qr-placeholder">
-                            <div class="qr-text">USDT QR Code</div>
-                            <div class="qr-note">Available upon request</div>
-                        </div>
-                        <p>Scan to pay with USDT (TRC20)</p>
-                    </div>
-
-                    <!-- ВОССТАНОВЛЕНА КНОПКА ПОДТВЕРЖДЕНИЯ ПЛАТЕЖА -->
+                    <!-- КНОПКА ПОДТВЕРЖДЕНИЯ ПЛАТЕЖА -->
                     <div class="payment-confirmation">
                         <button class="btn-confirm" onclick="showConfirmationForm()">
                             ✅ I've Paid - Send Full Report
                         </button>
-                        <p class confirmation-note>After payment, click to receive your full analysis</p>
+                        <p class="confirmation-note">After payment, click to receive your full analysis</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ВОССТАНОВЛЕНА СЕКЦИЯ ЦЕНООБРАЗОВАНИЯ -->
+    <!-- СЕКЦИЯ ЦЕНООБРАЗОВАНИЯ -->
     <section class="unified-pricing" id="ecosystem-pricing">
         <div class="container">
             <h2>Matrix Intelligence Ecosystem</h2>
@@ -180,8 +180,102 @@
         </div>
     </section>
 
+    <!-- НОВАЯ СЕКЦИЯ: ФИНАЛЬНЫЙ ПРИЗЫВ К ДЕЙСТВИЮ -->
+    <section class="final-cta-section">
+        <div class="container">
+            <h2>Ready to Transform Data into Strategic Advantage?</h2>
+            <p class="section-subtitle">Start with zero risk and experience the Matrix Intelligence difference</p>
+            
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <div class="cta-icon">🚀</div>
+                    <h3>Get Started Today</h3>
+                    <p>Request your free demo report and see the quality of our analysis</p>
+                    <button class="btn-primary" onclick="requestDemo()">
+                        Request Free Demo
+                    </button>
+                </div>
+                
+                <div class="cta-card">
+                    <div class="cta-icon">💎</div>
+                    <h3>Choose Your Plan</h3>
+                    <p>Select the intelligence package that matches your business needs</p>
+                    <button class="btn-outline" onclick="scrollToSection('ecosystem-pricing')">
+                        View Pricing Plans
+                    </button>
+                </div>
+                
+                <div class="cta-card">
+                    <div class="cta-icon">📈</div>
+                    <h3>Live Monitoring</h3>
+                    <p>Explore our real-time market intelligence dashboard</p>
+                    <button class="btn-outline" onclick="window.open('https://ngu2025.github.io/matrix-pulse/', '_blank')">
+                        View Live Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ О ПЛАТЕЖАХ -->
+            <div class="payment-info-cta">
+                <h3>💳 Fast & Secure USDT Payments</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <img src="images/USDT_QR_Code.png" alt="USDT QR Code" class="qr-small">
+                        <span>Scan QR Code</span>
+                    </div>
+                    <div class="payment-option">
+                        <div class="copy-address">
+                            <code>TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC</code>
+                            <button class="btn-copy-small" onclick="copyAddress()">Copy</button>
+                        </div>
+                        <span>Copy Address</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Matrix Intelligence</h3>
+                    <p>Where data becomes strategy</p>
+                    <div class="footer-contacts">
+                        <p>📧 digitaleng.contact@gmail.com</p>
+                        <p>📱 Telegram: @DigitalEng_Support</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#analysis">AI Market Analysis</a></li>
+                        <li><a href="#ecosystem-pricing">Intelligence Plans</a></li>
+                        <li><a href="https://ngu2025.github.io/matrix-pulse/">Live Monitoring</a></li>
+                        <li><a href="https://ngu2025.github.io/matrix-file-hub/">Project Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#refund">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Matrix Intelligence. All rights reserved. | Where data becomes strategy</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // ВОССТАНОВЛЕНЫ ПЛАТЕЖНЫЕ ФУНКЦИИ
+        // ПЛАТЕЖНЫЕ ФУНКЦИИ
         function copyAddress() {
             const address = "TGvyTtKBiSY5RHsfWipRdTjpWroeQSGLTC";
             navigator.clipboard.writeText(address).then(() => {
@@ -213,6 +307,228 @@
                 alert('Demo report request received! We will contact you within 24 hours.');
             }
         }
+
+        // Дополнительные функции
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function trackHubRedirect(source) {
+            console.log('Hub redirect from:', source);
+        }
     </script>
+
+    <style>
+        /* ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ QR-КОДА И НОВЫХ СЕКЦИЙ */
+        .usdt-payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            align-items: start;
+        }
+
+        .qr-code {
+            text-align: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .qr-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #00dc82;
+        }
+
+        /* СТИЛИ ДЛЯ ФИНАЛЬНОЙ СЕКЦИИ CTA */
+        .final-cta-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 80px 0;
+            border-top: 1px solid #334155;
+        }
+
+        .final-cta-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00dc82, #00c2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .cta-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cta-card:hover {
+            transform: translateY(-5px);
+            border-color: #00dc82;
+            box-shadow: 0 20px 40px rgba(0, 220, 130, 0.1);
+        }
+
+        .cta-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .cta-card p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* СТИЛИ ДЛЯ ИНФОРМАЦИИ О ПЛАТЕЖАХ */
+        .payment-info-cta {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .payment-info-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #00dc82;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qr-small {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            border: 2px solid #00dc82;
+        }
+
+        .copy-address {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(30, 41, 59, 0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+        }
+
+        .btn-copy-small {
+            background: #00dc82;
+            color: #0f172a;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* СТИЛИ ДЛЯ ФУТЕРА */
+        .footer {
+            background: #0f172a;
+            border-top: 1px solid #334155;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #00dc82;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, 
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #00dc82;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .usdt-payment-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .qr-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-options {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .final-cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </body>
 </html>
